@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Cart from '../cart/Cart';
 import { displayData, storeData } from '../Database/fakedb';
+import useCart from '../hoo/UseCart';
 import Product from '../product/Product';
 import "./shop.css"
 
 const Shop = () => {
     const [product,getProduct]=useState([])
-    const [cart,setCart]=useState([])
+    const [cart,setCart]=useCart()
     const [search,setSearch]=useState([])
+    const [pageCount,setPageCount]=useState(0)
+    const [Page,setPage]=useState(0)
+    const size=10;
 
     useEffect(()=>{
-       fetch("./products.JSON")
+       fetch(`http://localhost:5000/products?page=${Page}&&size=${size}`)
        .then(res=>res.json())
        .then(data=>{
-           getProduct(data)
-           setSearch(data)
+           getProduct(data.products)
+           setSearch(data.products)
+           const count=data.count
+           const pageNumber=Math.ceil(count/size)
+           setPageCount(pageNumber)
     })
-    },[])
+    },[Page])
     
     useEffect(()=>{
         if (product.length){
@@ -36,7 +44,18 @@ const Shop = () => {
         console.log(cart);
     }},[product])
     function addProduct(product){
-       const newCart=[...cart,product]
+        const exist=cart.find(pd=>pd.key===product.key)
+        let newCart=[]
+        if(exist){
+           const pro=cart.filter(pd=>pd.key!==product.key)
+           exist.quantity=exist.quantity+1
+           newCart=[...pro,product]
+        }
+       else{
+           product.quantity=1
+        newCart=[...cart,product]
+       }
+        
        setCart(newCart)
        storeData(product.key)
      }
@@ -60,9 +79,23 @@ const Shop = () => {
                 products={product} 
                 add={addProduct}> </Product>)
            }
+           <div className='pagination'>
+               {
+                   [...Array(pageCount).keys()]
+                   .map(number=><button
+                   className={number===Page?"selected":""}
+                   key={number}
+                   onClick={()=>setPage(number)}>{number+1}</button>)
+               }
            </div>
+           </div>
+           
            <div className="cart-container">
-            <Cart cart={cart}></Cart>
+            <Cart cart={cart}>
+            <Link to="/order">
+                    <button className="cart-button">Review Order</button>
+                </Link>
+            </Cart>
             </div> 
         </div>
         </div>
