@@ -15,7 +15,7 @@ const ManageOrder = () => {
        })
        .then(res=>{
            if(res.status==200){
-            res.json()
+           return res.json()
            }
            else if(res.status==401){
                history.push('/login')
