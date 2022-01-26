@@ -10,7 +10,7 @@ const useCart=()=>{
         
         const keys=Object.keys(savedCart);
         
-        fetch('http://localhost:5000/products/bykeys',{
+        fetch('https://intense-dawn-27289.herokuapp.com/products/bykeys',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

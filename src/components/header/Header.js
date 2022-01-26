@@ -18,6 +18,9 @@ const Header = () => {
                <NavLink activeStyle={activestyle} to="/order">Order Review</NavLink>
                <NavLink activeStyle={activestyle} to="/manage">Manage Inventory here</NavLink>  
                {
+                    user?.email &&  <NavLink activeStyle={activestyle} to="/manageOrder">Order Review</NavLink>
+               }
+               {
                     user?.email &&  <span className="text-white me-2">{user.displayName}</span>
                }
                {    

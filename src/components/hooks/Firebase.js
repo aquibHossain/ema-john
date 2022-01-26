@@ -1,5 +1,5 @@
 import authInitialize from "../../Firebase/firebase.initialize"
-import { GoogleAuthProvider,getAuth,signInWithPopup ,onAuthStateChanged ,signOut} from "firebase/auth";
+import { GoogleAuthProvider,getAuth,signInWithPopup ,onAuthStateChanged ,signOut, getIdToken} from "firebase/auth";
 import { useEffect, useState } from "react";
 
 const googleProvider = new GoogleAuthProvider();
@@ -25,12 +25,16 @@ const useFirebaseAuth=()=>{
           });
     }
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
+     const unsubscribe=onAuthStateChanged(auth, (user) => {
             if (user) {
+                getIdToken(user).then(idToken=>{localStorage.setItem("idToken",idToken)})
              setUser(user)
             } else {
+                setUser({})
             }
+
           });
+          return ()=> unsubscribe
     },[])
  return {
      user,

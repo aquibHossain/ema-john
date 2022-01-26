@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import PrivateRoute from './components/hooks/PrivateRoute';
 import Login from './components/Login/Login';
 import Manage from './components/Manage/Manage';
+import ManageOrder from './components/ManageOrder/ManageOrder';
 import NotFound from './components/NotFOund/NotFound';
 import Order from './components/Order/Order';
 import Placed from './components/Placed/Placed';
@@ -41,6 +42,9 @@ function App() {
        </PrivateRoute>
        <PrivateRoute path="/shipping">
         <Shipping></Shipping>
+       </PrivateRoute>
+       <PrivateRoute path="/manageOrder">
+        <ManageOrder></ManageOrder>
        </PrivateRoute>
        <Route path="/login">
         <Login></Login>

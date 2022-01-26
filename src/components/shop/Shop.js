@@ -16,7 +16,7 @@ const Shop = () => {
     const size=10;
 
     useEffect(()=>{
-       fetch(`http://localhost:5000/products?page=${Page}&&size=${size}`)
+       fetch(`https://intense-dawn-27289.herokuapp.com/products?page=${Page}&&size=${size}`)
        .then(res=>res.json())
        .then(data=>{
            getProduct(data.products)
