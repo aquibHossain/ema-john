@@ -1,13 +1,15 @@
 
+import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { Route,Redirect } from 'react-router-dom';
 import useAuthContext from '../Contexts/useAuthContext';
 
 
 const PrivateRoute = ({ children, ...rest }) => {
-    const {user}=useAuthContext()
+    const {user,isLoading}=useAuthContext()
     return (
-      <Route
+      <div>
+        { isLoading?<CircularProgress/>: <Route
         {...rest}
         render={({ location }) =>
           user.email ? (
@@ -21,7 +23,8 @@ const PrivateRoute = ({ children, ...rest }) => {
             />
           )
         }
-      />
+      />}
+      </div>
     );
   }
 export default PrivateRoute;

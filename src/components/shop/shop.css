@@ -1,28 +1,19 @@
-.shop-container{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-}
 .search-container{
-    background-color: rgba(0, 0, 0, 0.767);
+    background-color: #949886;
     text-align: center;
+    padding: 1.5em;
 }
 .search-container input{
     width: 75%;
     padding: 5px;
 }
-.product-container{
-    border-right: 1px solid lightgray;
-    margin-right: 5px;
-    margin-left: 30px;
-}
-.pagination{
-    margin: 50px;
-}
+
+
 .pagination button{
     margin-right: 20px;
-    padding: 0px 8px;
+    margin-bottom: 10px;
 }
 .pagination .selected{
-    background-color: rgb(65, 65, 240);
+    background-color: goldenrod;
     color: white;
 }

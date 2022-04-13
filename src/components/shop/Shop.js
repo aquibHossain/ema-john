@@ -1,6 +1,7 @@
+import { Box, CircularProgress, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import Cart from '../cart/Cart';
 import { displayData, storeData } from '../Database/fakedb';
 import useCart from '../hoo/UseCart';
@@ -66,38 +67,45 @@ const Shop = () => {
      }
     return (
         <div>
+             <Grid container spacing={2}  className='mb-3'>
+             <Grid item xs={12} md={12} sm={12} >
             <div className="search-container">
-                <input type="text"
+                <input  type="text"
                 onChange={searchItem} placeholder="Search Your Product" />
             </div>
-        <div className="shop-container">
-           <div className="product-container">
-           <h1>Product Item</h1>
+            </Grid>
+        <Grid item xs={12} md={9} sm={9} className='border-end'>
            {
-               search.map(product=><Product
+             search[0]? (search.map(product=><Product
                 key={product.key} 
                 products={product} 
-                add={addProduct}> </Product>)
+                add={addProduct}> </Product>)):(
+                <CircularProgress className='ms-5' />
+             )
            }
-           <div className='pagination'>
-               {
-                   [...Array(pageCount).keys()]
-                   .map(number=><button
-                   className={number===Page?"selected":""}
-                   key={number}
-                   onClick={()=>setPage(number)}>{number+1}</button>)
-               }
-           </div>
-           </div>
            
-           <div className="cart-container">
-            <Cart cart={cart}>
+           </Grid>
+        <Grid item xs={12} md={3} sm={3} className='text-md-start text-center '>
+            <Box className='sticky-top top-50'>
+            <Cart cart={cart} >
             <Link to="/order">
-                    <button className="cart-button">Review Order</button>
+                    <Button className='py-1 px-5 border-0 cart-button' style={{backgroundColor:'goldenrod'}}>Review Order</Button>{' '}
                 </Link>
             </Cart>
-            </div> 
-        </div>
+            </Box>
+            </Grid>
+        <Grid item xs={12} md={12} sm={12} >
+        <div className='pagination d-flex flex-wrap flex-md-nowrap mx-auto w-50 my-5'>
+               {
+                   [...Array(pageCount).keys()]
+                   .map(number=>
+                    <Button key={number}
+                    onClick={()=>setPage(number)} className={number===Page?"selected":""} variant="outline-warning">{number+1}</Button>)
+               }
+           </div>
+            </Grid>
+            </Grid>
+        
         </div>
     );
 };

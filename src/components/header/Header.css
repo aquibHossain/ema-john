@@ -1,22 +1,19 @@
-
 .logo{
-    width: 25%;
-    margin:20px auto;
-    display: block;
+    width: 4em;
+   margin-right: 15px;
 }
-.header nav{
-    background-color: black;
-    line-height: 40px;
+
+.header{
+    background-color: rgb(148 152 134 / 57%);
 }
-.header nav a{
+.note{
+    margin-top: 7em;
+    margin-bottom: 7em;
+}
+.bg{
+    background-color: #949886;
     color: white;
-    text-decoration: none; 
-    margin-right: 20px;
-    font-size: 20px;
-    padding: 6px;
-   
 }
-.header nav a:hover{
-  background-color: rgb(144, 144, 144);
-   
+.font{
+    font-family:'Times New Roman', Times, serif;
 }
