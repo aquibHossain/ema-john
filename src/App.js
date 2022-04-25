@@ -14,6 +14,7 @@ import Shipping from "./components/Shipping/Shipping";
 import Shop from "./components/shop/Shop";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/HomePart/Home/Home";
+import Payment from "./components/Payment/Payment";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
               <Placed></Placed>
             </PrivateRoute>
             <PrivateRoute path="/shipping">       
-              <Shipping></Shipping>
+              <Payment></Payment>
             </PrivateRoute>
             <PrivateRoute path="/manageOrder">
               <ManageOrder></ManageOrder>
